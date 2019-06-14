@@ -44,12 +44,8 @@ class Game(models.Model):
     character = models.OneToManyField(Character, on_delete=models.CASCADE)
 
 class Profile(models.Model):
-    name = models.OneToOneField(name, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     timezone = timezone.now
     profile_photo = models.OneToOneField(Proflie_photo, on_delete=models.CASCADE)
     game = models.OneToManyField(Game)
-
-
-
-
 
