@@ -6,4 +6,5 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', views.home, name='home'),
     path('profile/', views.profile, name='profile_page'),
+    path('character/create/', views.CharacterCreate.as_view(), name='character_create'),
 ]

@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .models import Profile
 from django.contrib.auth import login
+from django.views.generic.edit import CreateView
+from .models import Profile, Character
 
 
 # Create your views here.
@@ -9,3 +10,7 @@ def home(request):
 
 def profile(request):
     return render(request, 'profile.html')
+
+class CharacterCreate(CreateView):
+    model = Character
+    fields = ['name']
