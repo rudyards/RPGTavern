@@ -16,6 +16,7 @@ class Game(models.Model):
 
 class Character(models.Model):
     name = models.CharField(max_length=100)
+    player = models.ForeignKey(User, on_delete=models.CASCADE)
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     date = models.DateField('Date', default=datetime.now())
 
