@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from datetime import date, datetime
 from django.contrib.auth.models import User
-
+from django.urls import reverse
 
 
 # Create your models here.
@@ -20,6 +20,10 @@ class Character(models.Model):
     player = models.ForeignKey(User, on_delete=models.CASCADE)
     game = models.ForeignKey(Game, on_delete=models.CASCADE, blank=True, null=True)
     date = models.DateField('Date', default=datetime.now())
+
+    def get_absolute_url(self):
+        print('hitting')
+        return reverse('characters_detail', kwargs={'character_id': self.id})
 
 class Meeting(models.Model):
     date = models.DateField('Date')

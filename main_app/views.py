@@ -47,9 +47,11 @@ def games_detail(request, game_id):
 class CharacterCreate(LoginRequiredMixin, CreateView):
     model = Character
     fields = ['name']
+    def form_valid(self, form):
+        form.instance.player = self.request.user
+        return super().form_valid(form)
 
-
-class GameCreate(LoginRequiredMixin, CreateView):
+class GameCreate(CreateView):
     model = Game
     fields = ['name', 'description']
     
