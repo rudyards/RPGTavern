@@ -19,7 +19,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('index')
+            return redirect('profile_page')
         else:
             error_message = 'You Shall Not Pass! - try again'
     form = UserCreationForm()
