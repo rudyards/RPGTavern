@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
-from .models import Profile, Character, Game
+from .models import Profile, Character, Game, User
 
 # Create your views here.
 def home(request):
@@ -13,6 +13,7 @@ def home(request):
 
 
 def profile(request):
+    user = request.user
     games = Game.objects.all()
     return render(request, 'profile.html',{'games':games})
   
