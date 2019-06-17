@@ -3,13 +3,16 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
-from .models import Profile, Character, Game
+from .models import Profile, Character, Game, User
+# from django.contrib.auth.models import User
+
 
 # Create your views here.
 def home(request):
   return render(request, 'home.html')
 
 def profile(request):
+    user = request.user
     games = Game.objects.all()
     return render(request, 'profile.html',{'games':games})
 
