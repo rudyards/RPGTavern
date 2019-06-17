@@ -38,6 +38,10 @@ class CharacterCreate(CreateView):
     model = Character
     fields = ['name']
 
+    def form_valid(self, form):
+        form.instance.player = self.request.user
+        return super().form_valid(form)
+
 class GameCreate(CreateView):
     model = Game
     fields = ['name', 'description']
