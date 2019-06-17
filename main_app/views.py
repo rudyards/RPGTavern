@@ -3,7 +3,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
-from .models import Profile, Character, Game
+from .models import Profile, Character, Game, Proflie_photo, Game_photo, Character_photo, Character_sheet_photo
+import uuid
+import boto3
+
+S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
+BUCKET = 'taverntalk'
 
 # Create your views here.
 def home(request):
@@ -11,6 +16,20 @@ def home(request):
 
 def profile(request):
     return render(request, 'profile.html')
+
+def add_Profile_photo(request, profile_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Proflie_photo(url=url, profile=profile_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('profile', profile=profile_id)
 
 def signup(request):
     error_message = ''
