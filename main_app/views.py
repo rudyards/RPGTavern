@@ -1,5 +1,6 @@
 
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -16,6 +17,9 @@ def profile(request):
     user = request.user
     games = Game.objects.all()
     return render(request, 'profile.html',{'games':games})
+
+def get_absolute_url(self):
+        return reverse('detail', kwargs={'game_id': self.id})
   
 def signup(request):
     error_message = ''
