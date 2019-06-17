@@ -59,4 +59,6 @@ class CharacterCreate(LoginRequiredMixin, CreateView):
 class GameCreate(CreateView):
     model = Game
     fields = ['name', 'description']
-    
+    def form_valid(self, form):
+        form.instance.admin = self.request.user 
+        return super().form_valid(form)

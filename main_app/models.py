@@ -15,6 +15,9 @@ class Game(models.Model):
     admin = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=500)
 
+    def get_absolute_url(self):
+        return reverse('games_detail', kwargs={'game_id': self.id})
+
 class Character(models.Model):
     name = models.CharField(max_length=100)
     player = models.ForeignKey(User, on_delete=models.CASCADE)
