@@ -11,7 +11,7 @@ from .models import Profile, Character, Game, User
 def home(request):
   return render(request, 'home.html')
 
-
+@login_required
 def profile(request):
     user = request.user
     games = Game.objects.all()
