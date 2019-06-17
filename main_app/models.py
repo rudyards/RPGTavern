@@ -13,6 +13,7 @@ class Profile(models.Model):
 class Game(models.Model):
     name = models.CharField(max_length=300)
     admin = models.ForeignKey(User, on_delete=models.CASCADE)
+    description = models.TextField(max_length=500)
 
 class Character(models.Model):
     name = models.CharField(max_length=100)
