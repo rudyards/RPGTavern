@@ -10,15 +10,28 @@ class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     timezone = timezone.now
 
-
 class Game(models.Model):
+    name = models.CharField(max_length=300)
     admin = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Character(models.Model):
     name = models.CharField(max_length=100)
     player = models.ForeignKey(User, on_delete=models.CASCADE)
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, blank=True, null=True)
     date = models.DateField('Date', default=datetime.now())
+
+class Meeting(models.Model):
+    date = models.DateField('Date')
+    location = models.CharField(max_length=200)
+    note = models.TextField(max_length=500)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+
+class Comment(models.Model):
+    content = models.TextField(max_length=150)
+    date = models.DateField('Date', default=datetime.now())
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+
+
 
 class Proflie_photo(models.Model):
     url = models.CharField(max_length=300)
@@ -38,15 +51,5 @@ class Character_sheet_photo(models.Model):
     
 
 
-class Meeting(models.Model):
-    date = models.DateField('Date')
-    location = models.CharField(max_length=200)
-    note = models.TextField(max_length=500)
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
-
-class Comment(models.Model):
-    content = models.TextField(max_length=150)
-    date = models.DateField('Date', default=datetime.now())
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
 
 
