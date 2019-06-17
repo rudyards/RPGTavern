@@ -11,7 +11,7 @@ from .models import Profile, Character, Game, User
 def home(request):
   return render(request, 'home.html')
 
-
+@login_required
 def profile(request):
     user = request.user
     games = Game.objects.all()
@@ -32,9 +32,7 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
-@login_required
-def profile(request):
-    return render(request, 'profile.html')
+
 
 
 @login_required
@@ -56,7 +54,7 @@ class CharacterCreate(LoginRequiredMixin, CreateView):
         form.instance.player = self.request.user
         return super().form_valid(form)
 
-class GameCreate(CreateView):
+class GameCreate(LoginRequiredMixin, CreateView):
     model = Game
     fields = ['name', 'description']
     
