@@ -40,4 +40,4 @@ class CharacterCreate(CreateView):
 
 class GameCreate(CreateView):
     model = Game
-    fields = '__all__'
+    fields = ['name', 'description']
