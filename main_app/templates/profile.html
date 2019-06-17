@@ -7,7 +7,12 @@
 <h2>Game Section</h2>
 <ul>
     <li>
-        <a href="">Game page link</a>
+    {% for game in games %}
+    <a style="color: red; font-weight: bold; font-size:20px" href="games/{{game.id}}">
+        <p><em>{{game.name}}</em></p>
+    </a>
+    {% endfor %}
+        <!-- <a href="">Game page link</a> -->
     </li>
 </ul>
 <a href="{% url 'games_create' %}">Create A Game</a>

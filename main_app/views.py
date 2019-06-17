@@ -12,6 +12,10 @@ def home(request):
   return render(request, 'home.html')
 
 
+def profile(request):
+    games = Game.objects.all()
+    return render(request, 'profile.html',{'games':games})
+  
 def signup(request):
     error_message = ''
     if request.method == 'POST':
