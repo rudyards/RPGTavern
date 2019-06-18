@@ -17,7 +17,7 @@ def home(request):
 def profile(request):
     return render(request, 'profile.html')
 
-def add_Profile_photo(request, profile_id):
+def add_profile_photo(request, profile_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
         s3 = boto3.client('s3')
@@ -30,6 +30,35 @@ def add_Profile_photo(request, profile_id):
         except:
             print('An error occurred uploading file to S3')
     return redirect('profile', profile=profile_id)
+
+def add_character_photo(request, character_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Proflie_photo(url=url, character=character_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('characters_detail', character_id=character_id)
+
+
+def add_game_photo(request, game_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Proflie_photo(url=url, game=game_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('games_detail', game_id=game_id)
 
 def signup(request):
     error_message = ''
