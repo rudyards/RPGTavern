@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
 from django.views.generic.edit import CreateView
 from .models import Profile, Character, Game, Proflie_photo, Game_photo, Character_photo, Character_sheet_photo
+from .forms import MeetingForm
 import uuid
 import boto3
 
@@ -91,8 +92,16 @@ def characters_detail(request, character_id):
 @login_required
 def games_detail(request, game_id):
     game = Game.objects.get(id=game_id)
-    return render(request, 'games/detail.html', {'game': game})
+    meeting_form = MeetingForm()
+    return render(request, 'games/detail.html', {'game': game, 'meeting_form': meeting_form})
 
+def add_meeting(request, game_id):
+    form = MeetingForm(request.POST)
+    if form.is_valid():
+        new_meeting = form.save(commit=False)
+        new_meeting.game_id = game_id
+        new_meeting.save()
+    return redirect('games_detail', game_id=game_id)
 
 class CharacterCreate(LoginRequiredMixin, CreateView):
     model = Character

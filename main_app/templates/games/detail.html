@@ -19,15 +19,22 @@
 
 <h2>Upcoming Sessions</h2>
 <ul>
+    {% for meeting in game.meeting_set.all %}
     <li>
-        List Date, Time, Location, Notes
+        {{meeting.date}}, {{meeting.location}}, {{meeting.note}}
     </li>
+    {% endfor %}
 </ul>
 
-If GM:
-<form action="">
-    Form for creating a meeting
-</form>
+{% if user == game.admin %}
+<div>
+    <form action="{% url 'add_meeting' game.id %}" method="POST">
+        {% csrf_token %}
+        {{ meeting_form.as_p }}
+        <input type="submit" class="btn" value="Add Meeting">
+    </form>
+</div>
+{% endif %}
 
 <ul>
     <li>
@@ -41,4 +48,14 @@ If GM:
         Characters listed as links to Ch. Detail page
     </li>
 </ul>
+
+<script>
+    var dateEl = document.getElementById('id_date');
+    M.Datepicker.init(dateEl, {
+      format: 'yyyy-mm-dd',
+      defaultDate: new Date(),
+      setDefaultDate: true,
+      autoClose: true
+    });
+  </script>
 {% endblock %}
