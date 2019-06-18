@@ -20,9 +20,16 @@ def home(request):
 @login_required
 def profile(request):
     user = request.user
-    games = Game.objects.all()
-    characters = Character.objects.all()
-    return render(request, 'profile.html',{'games': games, 'characters': characters})
+    gmgames = Game.objects.filter(admin=user.id)
+    characters = Character.objects.filter(player=user.id)
+    playergames = []
+    for character in characters:
+        if character.game:
+            playergames.append(Game.objects.filter(id=character.game.id))
+    if playergames:
+        playergames = playergames[0]
+    meetings = {}
+    return render(request, 'profile.html',{'gmgames': gmgames, 'characters': characters, 'meetings': meetings, 'playergames': playergames})
   
 
 def add_profile_photo(request, profile_id):
