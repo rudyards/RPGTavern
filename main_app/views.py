@@ -72,3 +72,7 @@ class CharacterDelete(DeleteView):
 class GameUpdate(UpdateView):
     model = Game
     fields = ['name', 'description']
+
+class GameDelete(DeleteView):
+    model = Game
+    success_url = '/profile/'

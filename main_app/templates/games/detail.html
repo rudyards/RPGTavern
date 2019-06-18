@@ -4,6 +4,8 @@
 <h1><em>{{game.name}}</em></h1>
 
 <a href="{% url 'games_update' game.id %}">Edit Game</a>
+<a href="{% url 'games_delete' game.id %}">Delete</a>
+
 
 <div>
     <p style="font-weight:bold">{{game.description}}</p>
