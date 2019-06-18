@@ -12,5 +12,6 @@
 
 <p>A link to the game</p>
 
-
+<a href="{% url 'characters_update' character.id %}">Edit</a>
+<a href="{% url 'characters_delete' character.id %}">Delete</a>
 {% endblock %}
