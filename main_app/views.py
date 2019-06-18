@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
-from .models import Profile, Character, Game, User
+from .models import Profile, Character, Game, User, Comment
 
 # Create your views here.
 def home(request):
@@ -42,7 +42,8 @@ def characters_detail(request, character_id):
 @login_required
 def games_detail(request, game_id):
     game = Game.objects.get(id=game_id)
-    return render(request, 'games/detail.html', {'game': game})
+    comment = Comment.objects.all()
+    return render(request, 'games/detail.html', {'game': game, 'comment': comment})
 
 
 class CharacterCreate(LoginRequiredMixin, CreateView):

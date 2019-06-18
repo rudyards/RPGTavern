@@ -25,9 +25,9 @@
 </ul>
 
 If GM:
-<form action="">
+<!-- <form action="">
     Form for creating a meeting
-</form>
+</form> -->
 
 <ul>
     <li>
@@ -41,4 +41,15 @@ If GM:
         Characters listed as links to Ch. Detail page
     </li>
 </ul>
+{%for c in comment.all%}
+    <p>{{c.content}}</p>
+{%endfor%}
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    
+    <textarea name="content" placeholder="Comments..." cols="30" rows="10"></textarea>
+    <input type="submit" value="Submit">
+</form>
 {% endblock %}
