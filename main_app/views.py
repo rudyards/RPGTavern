@@ -1,6 +1,6 @@
 
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -32,9 +32,7 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
-@login_required
-def profile(request):
-    return render(request, 'profile.html')
+
 
 
 @login_required
@@ -62,3 +60,7 @@ class GameCreate(CreateView):
     def form_valid(self, form):
         form.instance.admin = self.request.user 
         return super().form_valid(form)
+
+class CharacterUpdate(UpdateView):
+    model = Character
+    fields = ['name']
