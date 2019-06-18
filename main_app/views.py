@@ -6,8 +6,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
 from django.views.generic.edit import CreateView
-from .models import Profile, Meeting, Character, Game, Proflie_photo, Game_photo, Character_photo, Character_sheet_photo
+from .models import Profile, Meeting, Character, Game, Proflie_photo, Game_photo, Character_photo, Character_sheet_photo,Comment
 from .forms import MeetingForm
+from .forms import CommentForm
+
 import uuid
 import boto3
 
@@ -32,7 +34,7 @@ def profile(request):
     return render(request, 'profile.html',{'gmgames': gmgames, 'characters': characters, 'meetings': meetings, 'playergames': playergames})
   
 
-def add_profile_photo(request):
+def add_profile_photo(request, profile_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
         s3 = boto3.client('s3')
@@ -44,7 +46,8 @@ def add_profile_photo(request):
             photo.save()
         except:
             print('An error occurred uploading file to S3')
-    return redirect('profile_page')
+    return redirect('profile', profile=profile_id)
+
 
 def add_character_photo(request, character_id):
     photo_file = request.FILES.get('photo-file', None)
@@ -99,9 +102,12 @@ def characters_detail(request, character_id):
 @login_required
 def games_detail(request, game_id):
     game = Game.objects.get(id=game_id)
+    comment = Comment.objects.all()
+    comment_form = CommentForm()
     meetings = Meeting.objects.filter(game=game.id)
     meeting_form = MeetingForm()
-    return render(request, 'games/detail.html', {'game': game, 'meeting_form': meeting_form, 'meetings': meetings})
+    return render(request, 'games/detail.html', {'game': game, 'meeting_form': meeting_form, 'meetings': meetings, 'comment_form': comment_form, 'comment':comment})
+
 
 def add_meeting(request, game_id):
     form = MeetingForm(request.POST)
@@ -110,6 +116,15 @@ def add_meeting(request, game_id):
         new_meeting.game_id = game_id
         new_meeting.save()
     return redirect('games_detail', game_id=game_id)
+
+def add_comment(request, game_id):
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_comment = form.save(commit=False)
+        new_comment.game_id = game_id
+        new_comment.save()
+    return redirect('games_detail', game_id=game_id)
+
 
 class CharacterCreate(LoginRequiredMixin, CreateView):
     model = Character

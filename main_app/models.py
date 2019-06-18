@@ -41,6 +41,7 @@ class Comment(models.Model):
 
 
 
+
 class Proflie_photo(models.Model):
     url = models.CharField(max_length=300)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
