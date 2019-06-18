@@ -5,8 +5,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
-from .models import Profile, Character, Game, User
+from django.views.generic.edit import CreateView
+from .models import Profile, Character, Game, Proflie_photo, Game_photo, Character_photo, Character_sheet_photo
+import uuid
+import boto3
 
+S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
+BUCKET = 'taverntalk'
 # Create your views here.
 def home(request):
   return render(request, 'home.html')
@@ -18,6 +23,50 @@ def profile(request):
     characters = Character.objects.all()
     return render(request, 'profile.html',{'games': games, 'characters': characters})
   
+
+def add_profile_photo(request, profile_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Proflie_photo(url=url, profile=profile_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('profile', profile=profile_id)
+
+def add_character_photo(request, character_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Proflie_photo(url=url, character=character_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('characters_detail', character_id=character_id)
+
+
+def add_game_photo(request, game_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Proflie_photo(url=url, game=game_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('games_detail', game_id=game_id)
+
 def signup(request):
     error_message = ''
     if request.method == 'POST':
