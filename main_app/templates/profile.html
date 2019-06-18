@@ -56,9 +56,9 @@
 
 <h3>Meetings</h3>
 <ul>
-        {% for game in meetings %}
+        {% for session in meetings %}
         <li>
-            {{game}}
+            Meeting of {{session.0.name}} on {{session.1.date}} at {{session.1.location}}. 
         </li>
         {% endfor %}
 </ul>
