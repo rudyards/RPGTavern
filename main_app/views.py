@@ -15,7 +15,8 @@ def home(request):
 def profile(request):
     user = request.user
     games = Game.objects.all()
-    return render(request, 'profile.html',{'games':games})
+    characters = Character.objects.all()
+    return render(request, 'profile.html',{'games': games, 'characters': characters})
   
 def signup(request):
     error_message = ''
@@ -32,9 +33,9 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
-@login_required
-def profile(request):
-    return render(request, 'profile.html')
+# @login_required
+# def profile(request):
+#     return render(request, 'profile.html')
 
 
 @login_required
