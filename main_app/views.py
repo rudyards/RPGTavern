@@ -32,7 +32,7 @@ def profile(request):
     return render(request, 'profile.html',{'gmgames': gmgames, 'characters': characters, 'meetings': meetings, 'playergames': playergames})
   
 
-def add_profile_photo(request, profile_id):
+def add_profile_photo(request):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
         s3 = boto3.client('s3')
@@ -44,7 +44,7 @@ def add_profile_photo(request, profile_id):
             photo.save()
         except:
             print('An error occurred uploading file to S3')
-    return redirect('profile', profile=profile_id)
+    return redirect('profile_page')
 
 def add_character_photo(request, character_id):
     photo_file = request.FILES.get('photo-file', None)
