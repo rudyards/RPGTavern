@@ -6,7 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
 from django.views.generic.edit import CreateView
+
 from .models import Profile, Character, Game, Proflie_photo, Game_photo, Character_photo, Character_sheet_photo
+from .models import Profile, Meeting, Character, Game, Proflie_photo, Game_photo, Character_photo, Character_sheet_photo
 from .forms import MeetingForm
 import uuid
 import boto3
@@ -92,8 +94,9 @@ def characters_detail(request, character_id):
 @login_required
 def games_detail(request, game_id):
     game = Game.objects.get(id=game_id)
+    meetings = Meeting.objects.filter(game=game.id)
     meeting_form = MeetingForm()
-    return render(request, 'games/detail.html', {'game': game, 'meeting_form': meeting_form})
+    return render(request, 'games/detail.html', {'game': game, 'meeting_form': meeting_form, 'meetings': meetings})
 
 def add_meeting(request, game_id):
     form = MeetingForm(request.POST)

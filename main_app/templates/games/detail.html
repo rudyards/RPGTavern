@@ -18,13 +18,21 @@
 </div>
 
 <h2>Upcoming Sessions</h2>
-<ul>
-    {% for meeting in game.meeting_set.all %}
-    <li>
-        {{meeting.date}}, {{meeting.location}}, {{meeting.note}}
-    </li>
+
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Notes</th>
+    </tr>
+    {% for meeting in meetings %}
+    <tr>
+        <td>{{meeting.date}} </td> <td> {{meeting.location}} </td><td> {{meeting.note}} </td>
+    </tr>
     {% endfor %}
-</ul>
+    
+</table>
+
 
 {% if user == game.admin %}
 <div>
