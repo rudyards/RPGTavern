@@ -17,7 +17,11 @@ S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'taverntalk'
 # Create your views here.
 def home(request):
-  return render(request, 'home.html')
+    user = request.user
+    if user.is_authenticated:
+        return render(request, 'profile.html')
+    else:
+        return render(request, 'home.html')
 
 @login_required
 def profile(request):
