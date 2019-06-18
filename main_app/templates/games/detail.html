@@ -12,22 +12,44 @@
     <img src="" alt="">
 </div>
 
-<div>
-    Comment block 
-    form for rich text editor goes in here
+<div><label>CoMmEnTs</label>
+    {%for c in comment%}
+        <p>{{c.content}}</p>
+    {%endfor%}
+    
+    
+    <form action="{% url 'add_comment' game.id %}" method="POST">
+        {% csrf_token %}
+        <!-- <textarea name="content" placeholder="Comments..." cols="30" rows="10"></textarea> -->
+        {{ comment_form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
 </div>
 
 <h2>Upcoming Sessions</h2>
-<ul>
-    <li>
-        List Date, Time, Location, Notes
-    </li>
-</ul>
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Notes</th>
+    </tr>
+    {% for meeting in meetings %}
+    <tr>
+        <td>{{meeting.date}} </td> <td> {{meeting.location}} </td><td> {{meeting.note}} </td>
+    </tr>
+    {% endfor %}
+    
+</table>
 
-If GM:
-<!-- <form action="">
-    Form for creating a meeting
-</form> -->
+{% if user == game.admin %}
+<div>
+    <form action="{% url 'add_meeting' game.id %}" method="POST">
+        {% csrf_token %}
+        {{ meeting_form.as_p }}
+        <input type="submit" class="btn" value="Add Meeting">
+    </form>
+</div>
+{% endif %}
 
 <ul>
     <li>
@@ -41,15 +63,14 @@ If GM:
         Characters listed as links to Ch. Detail page
     </li>
 </ul>
-{%for c in comment.all%}
-    <p>{{c.content}}</p>
-{%endfor%}
 
-
-<form action="" method="POST">
-    {% csrf_token %}
-    
-    <textarea name="content" placeholder="Comments..." cols="30" rows="10"></textarea>
-    <input type="submit" value="Submit">
-</form>
+<script>
+    var dateEl = document.getElementById('id_date');
+    M.Datepicker.init(dateEl, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
+    });
+</script>
 {% endblock %}
