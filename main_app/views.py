@@ -39,7 +39,8 @@ def profile(request):
         if sessions:
             for session in sessions:
                 meetings.append([game, session])
-    print(meetings)
+    for meeting in meetings:
+        print(meeting[0].name)
     return render(request, 'profile.html',{'gmgames': gmgames, 'characters': characters, 'meetings': meetings, 'playergames': playergames})
   
 

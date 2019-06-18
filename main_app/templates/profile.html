@@ -46,7 +46,7 @@
 <ul>
         {% for session in meetings %}
         <li>
-            {{session}}
+            Meeting of {{session.0.name}} on {{session.1.date}} at {{session.1.location}}. 
         </li>
         {% endfor %}
 </ul>
