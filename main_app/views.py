@@ -28,7 +28,18 @@ def profile(request):
             playergames.append(Game.objects.filter(id=character.game.id))
     if playergames:
         playergames = playergames[0]
-    meetings = {}
+    meetings = []
+    for game in gmgames:
+        sessions = Meeting.objects.filter(game=game.id)
+        if sessions:
+            for session in sessions:
+                meetings.append([game, session])
+    for game in playergames:
+        sessions = Meeting.objects.filter(game=game.id)
+        if sessions:
+            for session in sessions:
+                meetings.append([game, session])
+    print(meetings)
     return render(request, 'profile.html',{'gmgames': gmgames, 'characters': characters, 'meetings': meetings, 'playergames': playergames})
   
 
