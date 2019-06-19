@@ -9,8 +9,18 @@
 
 <div>
     <p style="font-weight:bold">{{game.description}}</p>
-    <img src="" alt="">
 </div>
+{% if game_photo %}
+    <img class="responsive-img card-panel" src="{{game_photo.last.url}}">
+{% else %}
+    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+{% endif %}
+<form action="{% url 'game_photo' game.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+    {% csrf_token %}
+    <input type="file" name="photo-file">
+    <br><br>
+    <input type="submit" class="btn" value="Upload Photo">
+</form>
 
 <div><label>CoMmEnTs</label>
     {%for c in comment%}
