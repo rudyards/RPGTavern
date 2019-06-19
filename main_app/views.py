@@ -45,8 +45,6 @@ def profile(request):
         if sessions:
             for session in sessions:
                 meetings.append([game, session])
-    for meeting in meetings:
-        print(meeting[0].name)
     return render(request, 'profile.html',{'gmgames': gmgames, 'characters': characters, 'meetings': meetings, 'playergames': playergames})
   
 
@@ -163,6 +161,29 @@ def add_comment(request, game_id):
         new_comment.save()
     return redirect('games_detail', game_id=game_id)
 
+@login_required
+def games_join(request, game_id):
+    user = request.user
+    games_in = []
+    dm_games = Game.objects.filter(admin=user.id)
+    characters =  Character.objects.filter(player=user.id)
+    for game in dm_games:
+        games_in.append(game)
+    for character in characters:
+        if character.game:
+            game_search = Game.objects.filter(id=character.game.id)
+            games_in.append(game_search[0])
+    print(games_in)
+    for game in games_in:
+        if (game.id == game_id):
+            #You're already in this game
+            return redirect('home')
+
+    characters =  Character.objects.filter(player=user.id).filter(game=None)
+    return render(request, 'games/join.html', {'characters': characters})
+            
+    
+    
 
 class CharacterCreate(LoginRequiredMixin, CreateView):
     model = Character
@@ -193,3 +214,4 @@ class GameUpdate(UpdateView):
 class GameDelete(DeleteView):
     model = Game
     success_url = '/profile/'
+
