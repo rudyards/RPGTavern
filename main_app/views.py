@@ -76,7 +76,21 @@ def add_character_photo(request, character_id):
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             photo = Character_photo(url=url, character_id=character_id)
-            print('photo url', photo.url)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('characters_detail', character_id=character_id)
+
+def add_character_sheet_photo(request, character_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        session = boto3.Session(profile_name='taverntalk')
+        s3 = session.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Character_sheet_photo(url=url, character_id=character_id)
             photo.save()
         except:
             print('An error occurred uploading file to S3')
@@ -92,7 +106,7 @@ def add_game_photo(request, game_id):
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
-            photo = Profile_photo(url=url, game=game_id)
+            photo = Game_photo(url=url, game_id=game_id)
             photo.save()
         except:
             print('An error occurred uploading file to S3')
@@ -117,18 +131,19 @@ def signup(request):
 def characters_detail(request, character_id):
     character = Character.objects.get(id=character_id)
     character_photo = Character_photo.objects.filter(character=character.id)
-    print(character_photo)
-    return render(request, 'characters/detail.html', {'character': character, 'character_photo': character_photo})
+    character_sheet_photo = Character_sheet_photo.objects.filter(character=character.id)
+    return render(request, 'characters/detail.html', {'character': character, 'character_photo': character_photo, 'character_sheet_photo': character_sheet_photo})
     
 
 @login_required
 def games_detail(request, game_id):
     game = Game.objects.get(id=game_id)
+    game_photo = Game_photo.objects.filter(game=game.id)
     comment = Comment.objects.all()
     comment_form = CommentForm()
     meetings = Meeting.objects.filter(game=game.id)
     meeting_form = MeetingForm()
-    return render(request, 'games/detail.html', {'game': game, 'meeting_form': meeting_form, 'meetings': meetings, 'comment_form': comment_form, 'comment':comment})
+    return render(request, 'games/detail.html', {'game': game, 'game_photo': game_photo, 'meeting_form': meeting_form, 'meetings': meetings, 'comment_form': comment_form, 'comment':comment})
 
 
 def add_meeting(request, game_id):

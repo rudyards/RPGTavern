@@ -17,7 +17,18 @@
 </form>
 
 <h2>Character Sheet</h2>
-<!-- image tag for character sheet display -->
+{% if character_sheet_photo %}
+    <img class="responsive-img card-panel" src="{{character_sheet_photo.last.url}}">
+{% else %}
+    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+{% endif %}
+<form action="{% url 'character_sheet_photo' character.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+    {% csrf_token %}
+    <input type="file" name="photo-file">
+    <br><br>
+    <input type="submit" class="btn" value="Upload Photo">
+</form>
+
 
 <p>A link to the game</p>
 
