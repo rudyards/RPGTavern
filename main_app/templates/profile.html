@@ -20,7 +20,7 @@
 <ul>
     <li>
     {% for game in gmgames %}
-    <a style="color: red; font-weight: bold; font-size:20px" href="games/{{game.id}}">
+    <a style="color: red; font-weight: bold; font-size:20px" href="/games/{{game.id}}">
         <p><em>{{game.name}}</em></p>
     </a>
     {% endfor %}
@@ -33,7 +33,7 @@
 <ul>
     <li>
     {% for game in playergames %}
-    <a style="color: red; font-weight: bold; font-size:20px" href="games/{{game.id}}">
+    <a style="color: red; font-weight: bold; font-size:20px" href="/games/{{game.id}}">
         <p><em>{{game.name}}</em></p>
     </a>
     {% endfor %}
@@ -46,7 +46,7 @@
 <ul>
     <li>
     {% for character in characters %}
-        <a style="color: red; font-weight: bold; font-size:20px" href="characters/{{character.id}}">
+        <a style="color: red; font-weight: bold; font-size:20px" href="/characters/{{character.id}}">
             <p><em>{{character.name}}</em></p>
         </a> 
         {% endfor %}
