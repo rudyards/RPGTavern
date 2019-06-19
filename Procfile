@@ -1,1 +1,1 @@
-web: gunicorn taverntalk
+web: gunicorn taverntalk.wsgi
