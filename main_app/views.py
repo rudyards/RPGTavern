@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
 from django.views.generic.edit import CreateView
-from .models import Profile, Meeting, Character, Game, Profile_photo, Game_photo, Character_photo, Character_sheet_photo,Comment
+from .models import Profile, Meeting, Character, Game, Game_photo, Character_photo, Character_sheet_photo, Comment, Profile_photo
 from .forms import MeetingForm
 from .forms import CommentForm
 
