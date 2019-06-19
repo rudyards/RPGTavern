@@ -12,7 +12,7 @@ nav {
   background-color: #23160F;
 }
 
-#home-wrapper {
+.tavern-wrapper {
   background: url('../images/landing_page.png') no-repeat fixed;
   background-size: cover;
   height: 100vh;
