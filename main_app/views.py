@@ -92,7 +92,7 @@ def add_game_photo(request, game_id):
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
-            photo = Profile_photo(url=url, game=game_id)
+            photo = Game_photo(url=url, game_id=game_id)
             photo.save()
         except:
             print('An error occurred uploading file to S3')
@@ -124,11 +124,12 @@ def characters_detail(request, character_id):
 @login_required
 def games_detail(request, game_id):
     game = Game.objects.get(id=game_id)
+    game_photo = Game_photo.objects.filter(game=game.id)
     comment = Comment.objects.all()
     comment_form = CommentForm()
     meetings = Meeting.objects.filter(game=game.id)
     meeting_form = MeetingForm()
-    return render(request, 'games/detail.html', {'game': game, 'meeting_form': meeting_form, 'meetings': meetings, 'comment_form': comment_form, 'comment':comment})
+    return render(request, 'games/detail.html', {'game': game, 'game_photo': game_photo, 'meeting_form': meeting_form, 'meetings': meetings, 'comment_form': comment_form, 'comment':comment})
 
 
 def add_meeting(request, game_id):
