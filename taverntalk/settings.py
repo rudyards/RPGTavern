@@ -123,3 +123,8 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/profile/'
 
 LOGOUT_REDIRECT_URL = '/'
+
+
+
+import django_heroku
+django_heroku.settings(locals())
