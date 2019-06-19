@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
 from django.views.generic.edit import CreateView
-from .models import Profile, Meeting, Character, Game, Proflie_photo, Game_photo, Character_photo, Character_sheet_photo,Comment
+from .models import Profile, Meeting, Character, Game, Profile_photo, Game_photo, Character_photo, Character_sheet_photo,Comment
 from .forms import MeetingForm
 from .forms import CommentForm
 
@@ -59,7 +59,7 @@ def add_profile_photo(request, profile_id):
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
-            photo = Proflie_photo(url=url, profile=profile_id)
+            photo = Profile_photo(url=url, profile=profile_id)
             photo.save()
         except:
             print('An error occurred uploading file to S3')
