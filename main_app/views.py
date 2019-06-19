@@ -100,7 +100,7 @@ def signup(request):
 @login_required
 def characters_detail(request, character_id):
     character = Character.objects.get(id=character_id)
-    character_photo = Character_photo.objects.all()
+    character_photo = Character_photo.objects.filter(character=character.id)
     print(character_photo)
     return render(request, 'characters/detail.html', {'character': character, 'character_photo': character_photo})
     
