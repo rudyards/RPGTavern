@@ -11,6 +11,7 @@ urlpatterns = [
     path('characters/create/', views.CharacterCreate.as_view(), name='characters_create'),
     path('characters/<int:pk>/update/', views.CharacterUpdate.as_view(), name='characters_update'),
     path('characters/<int:pk>/delete/', views.CharacterDelete.as_view(), name='characters_delete'),
+    path('characters/<int:character_id>/add_photo/', views.add_character_photo, name='character_photo'),
     path('profile/games/<int:game_id>/', views.games_detail, name='games_detail'),
     path('profile/games/<int:game_id>/add_meeting/', views.add_meeting, name='add_meeting'),
     path('profile/games/<int:game_id>/add_comment/', views.add_comment, name='add_comment'),
