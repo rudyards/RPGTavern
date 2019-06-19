@@ -180,9 +180,12 @@ def games_join(request, game_id):
             return redirect('home')
 
     characters =  Character.objects.filter(player=user.id).filter(game=None)
-    return render(request, 'games/join.html', {'characters': characters})
+    return render(request, 'games/join.html', {'characters': characters, 'game_id': game_id})
             
+@login_required
+def games_join_yes(request, game_id):
     
+    return redirect('games_detail', game_id=game_id)    
     
 
 class CharacterCreate(LoginRequiredMixin, CreateView):
