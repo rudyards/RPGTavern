@@ -4,8 +4,17 @@
 <h1>{{character.name}}</h1>
 <p>This is your detail page</p>
 
-<!-- Image tag for Avatar photo -->
-<!-- form for uploading/overwriting photo -->
+{% if character_photo %}
+    <img class="responsive-img card-panel" src="{{character_photo.last.url}}">
+{% else %}
+    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+{% endif %}
+<form action="{% url 'character_photo' character.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+    {% csrf_token %}
+    <input type="file" name="photo-file">
+    <br><br>
+    <input type="submit" class="btn" value="Upload Photo">
+</form>
 
 <h2>Character Sheet</h2>
 <!-- image tag for character sheet display -->

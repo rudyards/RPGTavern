@@ -17,7 +17,11 @@ S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'taverntalk'
 # Create your views here.
 def home(request):
-  return render(request, 'home.html')
+    user = request.user
+    if user.is_authenticated:
+        return render(request, 'profile.html')
+    else:
+        return render(request, 'home.html')
 
 @login_required
 def profile(request):
@@ -49,7 +53,8 @@ def profile(request):
 def add_profile_photo(request, profile_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
-        s3 = boto3.client('s3')
+        session = boto3.Session(profile_name='taverntalk')
+        s3 = session.client('s3')
         key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
@@ -64,12 +69,18 @@ def add_profile_photo(request, profile_id):
 def add_character_photo(request, character_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
-        s3 = boto3.client('s3')
+        session = boto3.Session(profile_name='taverntalk')
+        s3 = session.client('s3')
         key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
+<<<<<<< HEAD
             photo = Profile_photo(url=url, character=character_id)
+=======
+            photo = Character_photo(url=url, character_id=character_id)
+            print('photo url', photo.url)
+>>>>>>> 3e0cc616809a7d30b2bcbb7cb03c88bcf6c4e0a2
             photo.save()
         except:
             print('An error occurred uploading file to S3')
@@ -79,7 +90,8 @@ def add_character_photo(request, character_id):
 def add_game_photo(request, game_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
-        s3 = boto3.client('s3')
+        session = boto3.Session(profile_name='taverntalk')
+        s3 = session.client('s3')
         key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
@@ -108,7 +120,9 @@ def signup(request):
 @login_required
 def characters_detail(request, character_id):
     character = Character.objects.get(id=character_id)
-    return render(request, 'characters/detail.html', {'character': character})
+    character_photo = Character_photo.objects.filter(character=character.id)
+    print(character_photo)
+    return render(request, 'characters/detail.html', {'character': character, 'character_photo': character_photo})
     
 
 @login_required
