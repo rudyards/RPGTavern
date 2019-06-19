@@ -24,7 +24,7 @@
 
 <div><label>CoMmEnTs</label>
     {%for c in comment%}
-        <p><em style="font-weight:bold">{{user.username}} : </em>{{c.content}}</p>
+        <p><em style="font-weight:bold"> ({{c.user.username}}) : </em>{{c.content}}</p>
         <p>{{c.date}}</p>
     {%endfor%}
     

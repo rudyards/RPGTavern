@@ -156,9 +156,11 @@ def add_meeting(request, game_id):
 
 def add_comment(request, game_id):
     form = CommentForm(request.POST)
+    user = request.user
     if form.is_valid():
         new_comment = form.save(commit=False)
         new_comment.game_id = game_id
+        new_comment.user = user
         new_comment.save()
     return redirect('games_detail', game_id=game_id)
 
