@@ -21,7 +21,6 @@
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'characters_create' %}">New Character</a></li>
                     <li><a href="{% url 'games_create' %}">New Game</a></li>
-                    <li><a href="{% url 'profile_page' %}">User Settings</a></li>
                     <li><a href="{% url 'logout' %}">Log Out</a></li>
                     {% else %}
                     <!-- <li><a href="{% url 'login' %}">Log In</a></li> -->
@@ -31,7 +30,7 @@
             </div>
         </nav>
     </header>
-    <main class="container">
+    <main>
         {% block content %}
         {% endblock %}
     </main>
