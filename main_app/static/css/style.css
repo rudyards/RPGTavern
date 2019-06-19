@@ -2,11 +2,33 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background-color: aquamarine;
 }
 
 main {
   flex: 1 0 auto;
+}
+
+nav {
+  background-color: #23160F;
+}
+
+#home-wrapper {
+  background: url('../images/landing_page.png') no-repeat fixed;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#home-content-fix {
+  position: fixed;
+
+}
+
+#home-content {
+  background-color: #23160F;
+  color: white;
 }
 
 footer.page-footer {
