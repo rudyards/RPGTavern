@@ -75,12 +75,8 @@ def add_character_photo(request, character_id):
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
-<<<<<<< HEAD
-            photo = Profile_photo(url=url, character=character_id)
-=======
             photo = Character_photo(url=url, character_id=character_id)
             print('photo url', photo.url)
->>>>>>> 3e0cc616809a7d30b2bcbb7cb03c88bcf6c4e0a2
             photo.save()
         except:
             print('An error occurred uploading file to S3')
