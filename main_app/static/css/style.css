@@ -13,12 +13,17 @@ nav {
 }
 
 .tavern-wrapper {
-  background: url('../images/landing_page.png') no-repeat fixed;
+  background: url('../images/landing_page.png') no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.study-wrapper {
+  background: url('../images/user_page.jpg') no-repeat fixed;
+  background-size: cover;
 }
 
 #home-content-fix {
@@ -27,6 +32,11 @@ nav {
 }
 
 #home-content {
+  background-color: #23160F;
+  color: white;
+}
+
+#signup-wrapper {
   background-color: #23160F;
   color: white;
 }
