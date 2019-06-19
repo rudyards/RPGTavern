@@ -139,7 +139,7 @@ def characters_detail(request, character_id):
 def games_detail(request, game_id):
     game = Game.objects.get(id=game_id)
     game_photo = Game_photo.objects.filter(game=game.id)
-    comment = Comment.objects.all()
+    comment = Comment.objects.filter(game=game.id)
     comment_form = CommentForm()
     meetings = Meeting.objects.filter(game=game.id)
     meeting_form = MeetingForm()
