@@ -1,4 +1,5 @@
-This is working as intended.
+{% extends 'base_commons.html' %}
+{% block content %}
 
 <form method="post" action="{% url 'games_join_yes' game_id %}">
     {% csrf_token %}
@@ -13,3 +14,5 @@ This is working as intended.
     <a href="/">Get Me Out Of Here</a>
 
 </form>
+
+{% endblock %}
