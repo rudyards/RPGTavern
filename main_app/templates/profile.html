@@ -1,75 +1,87 @@
 {% extends 'base_study.html' %}
 {% block content %}
-
 <div class="study-wrapper">
     <div class="row">
-        <div class="col s8 offset-s2">
-            <h1>Welcome <em>{{user.username}}</em></h1>
+        <div id="top-profile" class="row">
+            <div class="col s5">
+                {% if profile_photo %}
+                <img class="responsive-img" id="profile-img" src="{{profile_photo.url}}">
+                {% else %}
+                <div class="card-panel teal-text center-align" id="card-profile-img">No Photos Uploaded</div>
+
+                {% endif %}
+
+                <form action="{% url 'profile_photo' user.id %}" enctype="multipart/form-data" method="POST"
+                    class="card-panel">
+
+                    {% csrf_token %}
+                    <input type="file" name="photo-file">
+                    <br><br>
+                    <input type="submit" class="btn" value="Upload Photo">
+                </form>
+            </div>
+            <div id="username" class="col s7 right">
+                <h1>Welcome <em>{{user.username}}</em></h1>
+            </div>
+            <div class="col s5 right">
+                <h3>Meetings</h3>
+                <ul>
+                    {% for session in meetings %}
+                    <li>
+                        Meeting of {{session.0.name}} on {{session.1.date}} at {{session.1.location}}.
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s4 right">
+                <h3>Games You Run</h3>
+                <ul>
+                    <li>
+                        {% for game in gmgames %}
+                        <a style="color: red; font-weight: bold; font-size:20px" href="/games/{{game.id}}">
+                            <p><em>{{game.name}}</em></p>
+                        </a>
+                        {% endfor %}
+                        <!-- <a href="">Game page link</a> -->
+                    </li>
+                </ul>
+                <a href="{% url 'games_create' %}">Create A Game</a>
+            </div>
+            <div id ="bottom-profile" class="row">
+                <div class="col s4">
+                    <h3>Characters</h3>
+                    <ul>
+                        <li>
+                            {% for character in characters %}
+                            <a style="color: red; font-weight: bold; font-size:20px"
+                                href="/characters/{{character.id}}">
+                                <p><em>{{character.name}}</em></p>
+                            </a>
+                            {% endfor %}
+                        </li>
+                    </ul>
+                    <a href="{% url 'characters_create' %}">Add a Character</a>
+                </div>
+                <div class="col s4">
+                    <h3>Games You're In</h3>
+                    <ul>
+                        <li>
+                            {% for game in playergames %}
+                            <a style="color: red; font-weight: bold; font-size:20px" href="/games/{{game.id}}">
+                                <p><em>{{game.name}}</em></p>
+                            </a>
+                            {% endfor %}
+                            <!-- <a href="">Game page link</a> -->
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
         </div>
     </div>
-    
-    {% if profile_photo %}
-    <img class="responsive-img card-panel" src="{{profile_photo.url}}">
-    {% else %}
-    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-
-    {% endif %}
-    
-    <form action="{% url 'profile_photo' user.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
-
-        {% csrf_token %}
-        <input type="file" name="photo-file">
-        <br><br>
-        <input type="submit" class="btn" value="Upload Photo">
-    </form>
-    
-    <h2>Games You Run</h2>
-    <ul>
-        <li>
-        {% for game in gmgames %}
-        <a style="color: red; font-weight: bold; font-size:20px" href="/games/{{game.id}}">
-            <p><em>{{game.name}}</em></p>
-        </a>
-        {% endfor %}
-            <!-- <a href="">Game page link</a> -->
-        </li>
-    </ul>
-    <a href="{% url 'games_create' %}">Create A Game</a>
-    
-    <h2>Games You're In</h2>
-    <ul>
-        <li>
-        {% for game in playergames %}
-        <a style="color: red; font-weight: bold; font-size:20px" href="/games/{{game.id}}">
-            <p><em>{{game.name}}</em></p>
-        </a>
-        {% endfor %}
-            <!-- <a href="">Game page link</a> -->
-        </li>
-    </ul>
-    
-    
-    <h2>Characters</h2>
-    <ul>
-        <li>
-        {% for character in characters %}
-            <a style="color: red; font-weight: bold; font-size:20px" href="/characters/{{character.id}}">
-                <p><em>{{character.name}}</em></p>
-            </a> 
-            {% endfor %}
-        </li>
-    </ul>
-    <a href="{% url 'characters_create' %}">Add a Character</a>
-    
-    <h3>Meetings</h3>
-    <ul>
-            {% for session in meetings %}
-            <li>
-                Meeting of {{session.0.name}} on {{session.1.date}} at {{session.1.location}}. 
-            </li>
-            {% endfor %}
-    </ul>
 </div>
-
 
 {% endblock %}
