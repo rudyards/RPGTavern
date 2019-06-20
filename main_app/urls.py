@@ -6,7 +6,7 @@ urlpatterns = [
     path('accounts/signup', views.signup, name='signup'),
     path('', views.home, name='home'),
     path('profile/', views.profile, name='profile_page'),
-    path('profile/add_photo/', views.add_profile_photo, name='profile_photo'),
+    path('profile/add_photo/<int:profile_id>/', views.add_profile_photo, name='profile_photo'),
     path('characters/<int:character_id>/', views.characters_detail, name='characters_detail'),
     path('characters/create/', views.CharacterCreate.as_view(), name='characters_create'),
     path('characters/<int:pk>/update/', views.CharacterUpdate.as_view(), name='characters_update'),
@@ -20,4 +20,7 @@ urlpatterns = [
     path('games/create/', views.GameCreate.as_view(), name='games_create'),
     path('games/<int:pk>/update/', views.GameUpdate.as_view(), name='games_update'),
     path('games/<int:pk>/delete/', views.GameDelete.as_view(), name='games_delete'),
+    path('games/<int:game_id>/join/', views.games_join, name='games_join'),
+    path('games/<int:game_id>/join/yes', views.games_join_yes, name='games_join_yes'),
+    path('games/<int:game_id>/kick/<int:character_id>', views.games_kick, name="games_kick"),
 ]

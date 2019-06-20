@@ -45,13 +45,11 @@ def profile(request):
         if sessions:
             for session in sessions:
                 meetings.append([game, session])
-    for meeting in meetings:
-        print(meeting[0].name)
     return render(request, 'profile.html',{'gmgames': gmgames, 'characters': characters, 'meetings': meetings, 'playergames': playergames})
   
 
 def add_profile_photo(request, profile_id):
-    print("<<<<<<<<<<<<<<")
+    profile_photo = Profile_photo.objects.all()
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
         s3 = boto3.client('s3')
@@ -60,10 +58,11 @@ def add_profile_photo(request, profile_id):
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             photo = Profile_photo(url=url, profile=profile_id)
+            print('photo assining to model')
             photo.save()
         except:
             print('An error occurred uploading file to S3')
-    return redirect('profile', profile=profile_id)
+    return redirect('profile_page')
 
 
 def add_character_photo(request, character_id):
@@ -115,6 +114,8 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            profile = Profile(user = user)
+            profile.save()
             login(request, user)
             return redirect('profile_page')
         else:
@@ -140,7 +141,8 @@ def games_detail(request, game_id):
     comment_form = CommentForm()
     meetings = Meeting.objects.filter(game=game.id)
     meeting_form = MeetingForm()
-    return render(request, 'games/detail.html', {'game': game, 'game_photo': game_photo, 'meeting_form': meeting_form, 'meetings': meetings, 'comment_form': comment_form, 'comment':comment})
+    characters = Character.objects.filter(game=game_id)
+    return render(request, 'games/detail.html', {'game': game, 'game_photo': game_photo, 'meeting_form': meeting_form, 'meetings': meetings, 'comment_form': comment_form, 'comment':comment, 'characters': characters})
 
 
 def add_meeting(request, game_id):
@@ -161,6 +163,45 @@ def add_comment(request, game_id):
         new_comment.save()
     return redirect('games_detail', game_id=game_id)
 
+@login_required
+def games_join(request, game_id):
+    user = request.user
+    games_in = []
+    dm_games = Game.objects.filter(admin=user.id)
+    characters =  Character.objects.filter(player=user.id)
+    for game in dm_games:
+        games_in.append(game)
+    for character in characters:
+        if character.game:
+            game_search = Game.objects.filter(id=character.game.id)
+            games_in.append(game_search[0])
+    print(games_in)
+    for game in games_in:
+        if (game.id == game_id):
+            #You're already in this game
+            return redirect('home')
+
+    characters =  Character.objects.filter(player=user.id).filter(game=None)
+    return render(request, 'games/join.html', {'characters': characters, 'game_id': game_id})
+            
+@login_required
+def games_join_yes(request, game_id):
+    user = request.user
+    game = Game.objects.filter(id=game_id)[0]
+    character = Character.objects.filter(player=user.id).filter(name=request.POST.get('character'))
+    character = character[0]
+    character.game = game
+    print(character.game)
+    character.save()
+    return redirect('games_detail', game_id=game_id)
+
+def games_kick(request, game_id, character_id):
+    character = Character.objects.filter(id=character_id)
+    character = character[0]
+    character.game = None
+    character.save()
+    return redirect('games_detail', game_id=game_id)    
+    
 
 class CharacterCreate(LoginRequiredMixin, CreateView):
     model = Character
@@ -191,3 +232,4 @@ class GameUpdate(UpdateView):
 class GameDelete(DeleteView):
     model = Game
     success_url = '/profile/'
+
