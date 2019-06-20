@@ -58,6 +58,24 @@ p {
   color: #DFD5B0;
 }
 
+#login-content {
+  background-color: rgba(72, 78, 68, .8);
+  border-radius: 5px;
+  box-shadow: 0 0 20px 2px #E4B96D;
+  color: #DFD5B0;
+  margin-top: 4vmin;
+  padding: 3vmin;
+}
+
+.active {
+  font-size: 3vmin;
+  color: #DFD5B0;
+}
+
+.btn {
+  background-color: rgb(96, 170, 209);
+}
+
 #signup-wrapper {
   background-color: #23160F;
   color: white;
