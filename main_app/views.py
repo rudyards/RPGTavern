@@ -184,7 +184,13 @@ def games_join(request, game_id):
             
 @login_required
 def games_join_yes(request, game_id):
-    
+    user = request.user
+    game = Game.objects.filter(id=game_id)[0]
+    character = Character.objects.filter(player=user.id).filter(name=request.POST.get('character'))
+    character = character[0]
+    character.game = game
+    print(character.game)
+    character.save()
     return redirect('games_detail', game_id=game_id)    
     
 

@@ -2,10 +2,10 @@ This is working as intended.
 
 <form method="post" action="{% url 'games_join_yes' game_id %}">
     {% csrf_token %}
-    <select>
-    {% for character in characters %}
-    <option name="character" value="{{character.name}}">{{character.name}}</option>
-    {% endfor %}
+    <select name="character">
+        {% for character in characters %}
+        <option value="{{character.name}}">{{character.name}}</option>
+        {% endfor %}
     </select>
     <br/>
     <br/>
