@@ -72,7 +72,7 @@
 <ul>
     {% for character in characters %}
     <li>
-        <a href="{% url 'characters_detail' character.id %}">{{character.name}}</a>
+        <a href="{% url 'characters_detail' character.id %}">{{character.name}}</a> {% if user == game.admin %}<a href="{% url 'games_kick' game.id character.id %}">Kick player</a>{% endif %}
     </li>
     {% endfor %}
 </ul>
