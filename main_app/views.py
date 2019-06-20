@@ -191,12 +191,25 @@ def games_join_yes(request, game_id):
     character.save()
     return redirect('games_detail', game_id=game_id)
 
+@login_required
 def games_kick(request, game_id, character_id):
+    if (request.user != game_id.admin):
+        return redirect('games_detail', game_id=game_id)
     character = Character.objects.filter(id=character_id)
     character = character[0]
     character.game = None
     character.save()
-    return redirect('games_detail', game_id=game_id)    
+    return redirect('games_detail', game_id=game_id)   
+
+@login_required
+def games_leave(request, game_id, character_id):
+    character = Character.objects.filter(id=character_id)
+    character = character[0]
+    if (request.user != character.player):
+        return redirect('games_detail', game_id=game_id)
+    character.game = None
+    character.save()
+    return redirect('home')    
     
 
 class CharacterCreate(LoginRequiredMixin, CreateView):
