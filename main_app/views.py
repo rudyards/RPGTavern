@@ -49,6 +49,7 @@ def profile(request):
   
 
 def add_profile_photo(request, profile_id):
+    profile_photo = Profile_photo.objects.all()
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
         s3 = boto3.client('s3')
@@ -57,10 +58,11 @@ def add_profile_photo(request, profile_id):
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             photo = Profile_photo(url=url, profile=profile_id)
+            print('photo assining to model')
             photo.save()
         except:
             print('An error occurred uploading file to S3')
-    return redirect('profile', profile=profile_id)
+    return redirect('profile_page')
 
 
 def add_character_photo(request, character_id):
@@ -112,6 +114,8 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            profile = Profile(user = user)
+            profile.save()
             login(request, user)
             return redirect('profile_page')
         else:
