@@ -3,6 +3,8 @@ body {
   min-height: 100vh;
   flex-direction: column;
   color: white;
+  font-family: 'El Messiri', sans-serif;
+
 }
 
 #tavern {
@@ -37,22 +39,64 @@ nav {
   background-color: rgba(35, 22, 15, .9);
 }
 
+a {
+  color: rgb(99, 183, 228);
+}
+
 #home-content {
   text-align: center;
   margin-top: 15vmin;
-  background-color: rgba(72, 78, 68, .7);
+  background-color: rgba(72, 78, 68, .8);
   border-radius: 5px;
+  box-shadow: 0 0 20px 2px #E4B96D;
 }
 
-#signup-wrapper {
-  background-color: #23160F;
+p {
+  font-size: 4vmin;
+}
+
+.tavern-h1 {
+  font-family: 'Uncial Antiqua', cursive;
+  color: #DFD5B0;
+}
+
+#login-content {
+  background-color: rgba(72, 78, 68, .8);
+  border-radius: 5px;
+  box-shadow: 0 0 20px 2px #E4B96D;
+  color: #DFD5B0;
+  margin-top: 4vmin;
+  padding: 3vmin;
+}
+
+#signup-content {
+  background-color: rgba(72, 78, 68, .8);
+  border-radius: 5px;
+  box-shadow: 0 0 20px 2px #E4B96D;
+  color: #DFD5B0;
+  margin-top: 13vmin;
+  padding: 3vmin;
+}
+
+label {
+  font-size: 3vmin;
+  color: #DFD5B0;
+}
+
+input {
   color: white;
+}
+
+.btn {
+  background-color: rgb(96, 170, 209);
 }
 
 footer.page-footer {
   padding-top: 0;
   text-align: right;
+  opacity: .9;
 }
+
 
 #charheader {
   margin: 12vmin 0 0 0;
@@ -70,10 +114,14 @@ footer.page-footer {
   max-height:30vw;
   object-fit: contain; 
 }
+#ses {
+  width: 0 20vmin 0 0;
+
+}
 
 #tavern-footer {
   background-color: #23160F;
   color: #E4B96D;
-
 }
+
 

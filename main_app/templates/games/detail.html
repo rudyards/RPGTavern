@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_commons.html' %}
 {% block content %}
 
 <!-- <div class="container"> -->
@@ -77,7 +77,7 @@
             </div>
         </div>
 
-        
+
         <h2>Characters</h2>
         <ul>
             {% for character in characters %}
@@ -91,6 +91,7 @@
         Invite players using the following link: https://taverntalk.herokuapp.com/games/{{game.id}}/join
         
         {% endif %}
+
 <!-- <h2>Upcoming Sessions</h2>
 <table>
     <tr>
@@ -104,7 +105,7 @@
     </tr>
     {% endfor %}
     
-</table>
+</table> -->
 
 {% if user == game.admin %}
 <div>
