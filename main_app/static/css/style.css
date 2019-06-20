@@ -136,34 +136,6 @@ footer.page-footer {
   opacity: .9;
 }
 
-#top-profile {
-  margin-top: 9vmin;
-  padding: 5vmin;
-}
-
-#username {
-  padding: 0 0 0 20vmin;
-  margin: -10vmin 0 -5vmin 0;
-}
-
-#card-profile-img {
-  width: 30vw;
-  height: 40vh;
-  max-height:30vw;
-  object-fit: contain; 
-}
-
-
-#profile-img {
-  width: 30vw;
-  height: 40vh;
-  max-height:30vw;
-  object-fit: contain; 
-}
-
-#bottom-profile {
-  padding: 0 2vmin 0 2vmin;
-}
 
 #charheader {
   margin: 12vmin 0 0 0;
@@ -175,13 +147,16 @@ footer.page-footer {
   object-fit: contain; 
 }
 
-#char-img {
+#charimg {
   margin-top: 12vmin;
   height: 40vh;
   max-height:30vw;
   object-fit: contain; 
 }
+#ses {
+  width: 0 20vmin 0 0;
 
+}
 
 #tavern-footer {
   background-color: #23160F;
