@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_study.html' %}
 {% block content %}
 
 <div class="study-wrapper">
@@ -8,13 +8,15 @@
         </div>
     </div>
     
-    {% for photo in profile.photo_set.all %}
-    <img class="responsive-img card-panel" src="{{photo.url}}">
-    {% empty %}
+    {% if profile_photo %}
+    <img class="responsive-img card-panel" src="{{profile_photo.url}}">
+    {% else %}
     <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-    {% endfor %}
 
-    <form action="{% url 'profile_photo' %}" enctype="multipart/form-data" method="POST" class="card-panel">
+    {% endif %}
+    
+    <form action="{% url 'profile_photo' user.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+
         {% csrf_token %}
         <input type="file" name="photo-file">
         <br><br>

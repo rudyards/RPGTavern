@@ -67,6 +67,7 @@
                 {%endfor%}
 
 
+
                 <form action="{% url 'add_comment' game.id %}" method="POST">
                     {% csrf_token %}
                     <!-- <textarea name="content" placeholder="Comments..." cols="30" rows="10"></textarea> -->
@@ -76,16 +77,53 @@
             </div>
         </div>
 
-        <div class="col s4">
-            <h2>Characters</h2>
-            <ul>
-                <li>
-                    Characters listed as links to Ch. Detail page
-                </li>
-            </ul>
-        </div>
-    </div>
-<!-- </div> -->
+
+<h2>Upcoming Sessions</h2>
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Notes</th>
+    </tr>
+    {% for meeting in meetings %}
+    <tr>
+        <td>{{meeting.date}} </td> <td> {{meeting.location}} </td><td> {{meeting.note}} </td>
+    </tr>
+    {% endfor %}
+    
+</table>
+
+{% if user == game.admin %}
+<div>
+    <form action="{% url 'add_meeting' game.id %}" method="POST">
+        {% csrf_token %}
+        {{ meeting_form.as_p }}
+        <input type="submit" class="btn" value="Add Meeting">
+    </form>
+</div>
+{% endif %}
+
+<ul>
+    <li>
+        Index past meetings
+    </li>
+</ul>
+
+<h2>Characters</h2>
+<ul>
+    {% for character in characters %}
+    <li>
+        <a href="{% url 'characters_detail' character.id %}">{{character.name}}</a> {% if user == game.admin %}<a href="{% url 'games_kick' game.id character.id %}">Kick player</a>{% endif %} {% if user == character.player %}<a href="{% url 'games_leave' game.id character.id%}">Leave Game{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+{% if user == game.admin %}
+Invite players using the following link: https://taverntalk.herokuapp.com/games/{{game.id}}/join
+
+{% endif %}
+
+
 <script>
     var dateEl = document.getElementById('id_date');
     M.Datepicker.init(dateEl, {
