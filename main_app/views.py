@@ -46,7 +46,7 @@ def profile(request):
         sessions = Meeting.objects.filter(game=game.id)
         if sessions:
             for session in sessions:
-                if (session.date > datetime.date(datetime.now())):
+                if (session.date > date.today()):
                     meetings.append([game, session])
     meetings = meetings[::-1]
     return render(request, 'profile.html',{'gmgames': gmgames, 'characters': characters, 'meetings': meetings, 'playergames': playergames})
