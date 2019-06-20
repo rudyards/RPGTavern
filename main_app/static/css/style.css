@@ -2,6 +2,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  color: white;
 }
 
 #tavern {
@@ -53,13 +54,26 @@ footer.page-footer {
   text-align: right;
 }
 
-
-#ses {
-  width: 0 20vmin 0 0;
-
+#charheader {
+  margin: 12vmin 0 0 0;
 }
+
+#charsheet {
+  height: 70vh;
+  max-height:60vw;
+  object-fit: contain; 
+}
+
+#charimg {
+  margin-top: 12vmin;
+  height: 40vh;
+  max-height:30vw;
+  object-fit: contain; 
+}
+
 #tavern-footer {
   background-color: #23160F;
   color: #E4B96D;
 
 }
+
