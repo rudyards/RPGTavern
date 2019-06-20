@@ -2,6 +2,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  font-family: 'El Messiri', sans-serif;
 }
 
 #tavern {
@@ -36,11 +37,25 @@ nav {
   background-color: rgba(35, 22, 15, .9);
 }
 
+a {
+  color: rgb(99, 183, 228);
+}
+
 #home-content {
   text-align: center;
   margin-top: 15vmin;
-  background-color: rgba(72, 78, 68, .7);
+  background-color: rgba(72, 78, 68, .8);
   border-radius: 5px;
+  box-shadow: 0 0 20px 2px #E4B96D;
+}
+
+p {
+  font-size: 4vmin;
+}
+
+.tavern-h1 {
+  font-family: 'Uncial Antiqua', cursive;
+  color: #DFD5B0;
 }
 
 #signup-wrapper {
