@@ -26,6 +26,20 @@ body {
   height: 100vh;
 }
 
+#commons {
+  background: url('../images/game_page.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+}
+
+#game-wrapper {
+  width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15vh;
+  font-family: 'IM Fell English SC', serif;
+}
+
 main {
   flex: 1 0 auto;
 }
@@ -51,7 +65,7 @@ a {
   box-shadow: 0 0 20px 2px #E4B96D;
 }
 
-p {
+.home-p {
   font-size: 4vmin;
 }
 
@@ -89,6 +103,31 @@ input {
 
 .btn {
   background-color: rgb(96, 170, 209);
+}
+
+#session-col-wrapper {
+  margin-right: 3vw;
+  background-color: rgba(73, 25, 9, .7);
+  color: #DFD5B0;
+}
+
+h3 {
+  border-bottom: 2px solid #DFD5B0;
+}
+
+.session-row {
+  border-bottom: 1px solid #E4B96D;
+  padding: 8px;
+}
+
+#session-form-wrapper {
+  background-color: rgba(49, 13, 1, 0.8);
+  border: 1px solid black;
+  padding: 1vmin;
+}
+
+#id_date, #id_location, #id_note {
+  font-size: 2vmin;
 }
 
 footer.page-footer {
@@ -150,3 +189,4 @@ footer.page-footer {
 }
 
 
+/* #B76B46 */

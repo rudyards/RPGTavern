@@ -48,6 +48,7 @@ def profile(request):
             for session in sessions:
                 if (session.date > datetime.date(datetime.now())):
                     meetings.append([game, session])
+    meetings = meetings[::-1]
     return render(request, 'profile.html',{'gmgames': gmgames, 'characters': characters, 'meetings': meetings, 'playergames': playergames})
   
 
