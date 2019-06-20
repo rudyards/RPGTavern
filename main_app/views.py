@@ -137,7 +137,8 @@ def games_detail(request, game_id):
     comment_form = CommentForm()
     meetings = Meeting.objects.filter(game=game.id)
     meeting_form = MeetingForm()
-    return render(request, 'games/detail.html', {'game': game, 'game_photo': game_photo, 'meeting_form': meeting_form, 'meetings': meetings, 'comment_form': comment_form, 'comment':comment})
+    characters = Character.objects.filter(game=game_id)
+    return render(request, 'games/detail.html', {'game': game, 'game_photo': game_photo, 'meeting_form': meeting_form, 'meetings': meetings, 'comment_form': comment_form, 'comment':comment, 'characters': characters})
 
 
 def add_meeting(request, game_id):
