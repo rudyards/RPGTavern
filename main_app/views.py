@@ -191,6 +191,10 @@ def games_join_yes(request, game_id):
     character.game = game
     print(character.game)
     character.save()
+    return redirect('games_detail', game_id=game_id)
+
+def games_kick(request, game_id, player_id):
+
     return redirect('games_detail', game_id=game_id)    
     
 
