@@ -7,15 +7,16 @@
             <h1>Welcome <em>{{user.username}}</em></h1>
         </div>
     </div>
-
     
     {% if profile_photo %}
     <img class="responsive-img card-panel" src="{{profile_photo.url}}">
     {% else %}
     <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+
     {% endif %}
     
     <form action="{% url 'profile_photo' user.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+
         {% csrf_token %}
         <input type="file" name="photo-file">
         <br><br>

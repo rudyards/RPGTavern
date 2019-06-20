@@ -53,7 +53,13 @@ footer.page-footer {
   text-align: right;
 }
 
+
+#ses {
+  width: 0 20vmin 0 0;
+
+}
 #tavern-footer {
   background-color: #23160F;
   color: #E4B96D;
+
 }
