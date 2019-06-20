@@ -2,7 +2,9 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  color: white;
   font-family: 'El Messiri', sans-serif;
+
 }
 
 #tavern {
@@ -95,10 +97,31 @@ footer.page-footer {
   opacity: .9;
 }
 
+
+#charheader {
+  margin: 12vmin 0 0 0;
+}
+
+#charsheet {
+  height: 70vh;
+  max-height:60vw;
+  object-fit: contain; 
+}
+
+#charimg {
+  margin-top: 12vmin;
+  height: 40vh;
+  max-height:30vw;
+  object-fit: contain; 
+}
 #ses {
   width: 0 20vmin 0 0;
+
 }
+
 #tavern-footer {
   background-color: #23160F;
   color: #E4B96D;
 }
+
+
