@@ -75,6 +75,11 @@
     </li>
 </ul>
 
+{% if user == game.admin %}
+Invite players using the following link: https://taverntalk.herokuapp.com/games/{{game.id}}/join
+
+{% endif %}
+
 <script>
     var dateEl = document.getElementById('id_date');
     M.Datepicker.init(dateEl, {
