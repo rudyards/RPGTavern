@@ -51,6 +51,7 @@ def profile(request):
   
 
 def add_profile_photo(request, profile_id):
+    print("<<<<<<<<<<<<<<")
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
         s3 = boto3.client('s3')
