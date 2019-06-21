@@ -2,80 +2,51 @@
 {% block content %}
 <div class="study-wrapper">
     <div class="row">
-        <div id="top-profile" class="row">
-            <div class="col s5">
-                {% if profile_photo %}
-                <img class="responsive-img" id="profile-img" src="{{profile_photo.url}}">
-                {% else %}
-                <div class="card-panel teal-text center-align" id="card-profile-img">No Photos Uploaded</div>
+        <div id="username" class="col s7 right">
+            <h1 class="center-align study-h1">Welcome <em>{{user.username}}</em></h1>
+        </div>
+        <div class="col s5 right">
+            <h3 class="study-h3">Upcoming Sessions for All Games</h3>
+            <ul>
+                {% for session in meetings %}
+                <li class="study-li">
+                    Meeting of {{session.0.name}} on {{session.1.date}} at {{session.1.location}}.
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 
-                {% endif %}
-
-                <form action="{% url 'profile_photo' user.id %}" enctype="multipart/form-data" method="POST"
-                    class="card-panel">
-
-                    {% csrf_token %}
-                    <input type="file" name="photo-file">
-                    <br><br>
-                    <input type="submit" class="btn" value="Upload Photo">
-                </form>
-            </div>
-            <div id="username" class="col s7 right">
-                <h1>Welcome <em>{{user.username}}</em></h1>
-            </div>
-            <div class="col s5 right">
-                <h3>Meetings</h3>
+        <div class="row">
+            <div class="col s4 right">
+                <h3 class="study-h3">Games You Run</h3>
                 <ul>
-                    {% for session in meetings %}
-                    <li>
-                        Meeting of {{session.0.name}} on {{session.1.date}} at {{session.1.location}}.
+                    {% for game in gmgames %}
+                    <li class="study-li">
+                        <a class="study-a" href="/games/{{game.id}}">{{game.name}}</a>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col s4 right">
-                <h3>Games You Run</h3>
-                <ul>
-                    <li>
-                        {% for game in gmgames %}
-                        <a style="color: red; font-weight: bold; font-size:20px" href="/games/{{game.id}}">
-                            <p><em>{{game.name}}</em></p>
-                        </a>
-                        {% endfor %}
-                        <!-- <a href="">Game page link</a> -->
-                    </li>
-                </ul>
-                <a href="{% url 'games_create' %}">Create A Game</a>
-            </div>
             <div id ="bottom-profile" class="row">
                 <div class="col s4">
-                    <h3>Characters</h3>
+                    <h3 class="study-h3">Characters</h3>
                     <ul>
-                        <li>
-                            {% for character in characters %}
-                            <a style="color: red; font-weight: bold; font-size:20px"
-                                href="/characters/{{character.id}}">
-                                <p><em>{{character.name}}</em></p>
-                            </a>
-                            {% endfor %}
+                        {% for character in characters %}
+                        <li class="study-li">
+                            <a class="study-a" href="/characters/{{character.id}}">{{character.name}}</a>
                         </li>
+                        {% endfor %}
                     </ul>
-                    <a href="{% url 'characters_create' %}">Add a Character</a>
                 </div>
                 <div class="col s4">
-                    <h3>Games You're In</h3>
+                    <h3 class="study-h3">Games You're In</h3>
                     <ul>
-                        <li>
-                            {% for game in playergames %}
-                            <a style="color: red; font-weight: bold; font-size:20px" href="/games/{{game.id}}">
-                                <p><em>{{game.name}}</em></p>
-                            </a>
-                            {% endfor %}
-                            <!-- <a href="">Game page link</a> -->
+                        {% for game in playergames %}
+                        <li class="study-li">
+                            <a class="study-a" href="/games/{{game.id}}">{{game.name}}</a>
                         </li>
+                        {% endfor %}
                     </ul>
                     
                 </div>

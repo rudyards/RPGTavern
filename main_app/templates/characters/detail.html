@@ -1,52 +1,53 @@
 {% extends 'base_armory.html' %}
 {% block content %}
-<!-- <div class="container"></div> -->
-<!-- <h1>{{character.name}}</h1> -->
-<div class="row">
-     
-    <div class="col s7">
-        <div  class="container">
-            <h5 id="charheader">  {{character.name}}'s Character Sheet <a href="#">Link to game</a></h5>
-            <a href="{% url 'characters_update' character.id %}">Edit</a>
-            <a href="{% url 'characters_delete' character.id %}">Delete</a>
-            {% if character_sheet_photo %}
-            
-            
-            <img  class="responsive-img " id="charsheet" src="{{character_sheet_photo.last.url}}">
-            {% else %}
-
-            <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-            {% endif %}
-            <!-- </div> -->
-            <form action="{% url 'character_sheet_photo' character.id %}" enctype="multipart/form-data" method="POST"
-                class="card-panel">
-                {% csrf_token %}
-                <input type="file" name="photo-file">
-                <br><br>
-                <input type="submit" class="btn" value="Upload Photo">
-            </form>
+<div class="character-wrapper">
+    <h2 class="center-align">{{character.name}}</h2>
+    <div id="char-links-row" class="center-align row">
+        <div class="col s4">
+            <a class="char-a" href="{% url 'characters_update' character.id %}">EDIT</a>
+        </div>
+        <div class="col s4">
+            <a class="char-a" href="#">ENTER GAME</a>
+        </div>
+        <div class="col s4">
+            <a class="char-a" href="{% url 'characters_delete' character.id %}">DELETE</a>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col s5">
-            <div class="container">
-
+    <div class="row">    
+        <div class="character-col-wrapper">
+            <div class="col s7">         
+                <h5 id="charheader">  {{character.name}}'s Character Sheet </h5>
+                                
+                {% if character_sheet_photo %}
+                               
+                <img  class="responsive-img " id="charsheet" src="{{character_sheet_photo.last.url}}">
+                {% else %}
+    
+                <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+                {% endif %}
+                <form class="char-form" action="{% url 'character_sheet_photo' character.id %}" enctype="multipart/form-data" method="POST"
+                    class="card-panel">
+                    {% csrf_token %}
+                    <input type="file" name="photo-file">
+                    <br><br>
+                    <input type="submit" class="btn" value="Upload Photo">
+                </form>
+            </div>        
+            <div class="col s5">
                 {% if character_photo %}
                 <img class="responsive-img" id="charimg" src="{{character_photo.last.url}}">
                 {% else %}
                 <div class="card-panel teal-text center-align">No Photos Uploaded</div>
                 {% endif %}
-
-                <form action="{% url 'character_photo' character.id %}" enctype="multipart/form-data" method="POST"
+    
+                <form class="char-form" action="{% url 'character_photo' character.id %}" enctype="multipart/form-data" method="POST"
                     class="card-panel center-align">
                     {% csrf_token %}
                     <input class="center-align" type="file" name="photo-file">
                     <br><br>
                     <input type="submit" class="btn" value="Upload Photo">
-                </form>
-
-            </div>
+                </form>          
+            </div>  
         </div>
     </div>
 </div>

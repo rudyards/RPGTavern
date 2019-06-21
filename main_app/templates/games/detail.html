@@ -2,6 +2,15 @@
 {% block content %}
 
 <div id="game-wrapper">
+    <h1 class="center-align game-h1"><em>{{game.name}}</em></h1>
+    <div id="game-links-row" class="center-align row">
+        <div class="col s6">
+            <a class="game-a" href="{% url 'games_update' game.id %}">EDIT</a>
+        </div>
+        <div class="col s6">
+            <a class="game-a" href="{% url 'games_delete' game.id %}">DELETE</a>
+        </div>
+    </div>
     <div class="row">
         <div  id="session-col-wrapper" class="col s3">
             <h3>Upcoming Sessions</h3>
@@ -27,55 +36,35 @@
                     <form action="{% url 'add_meeting' game.id %}" method="POST">
                         {% csrf_token %}
                         {{ meeting_form.as_p }}
-                        <input type="submit" class="btn" value="Add Meeting">
+                        <input class="game-btn" type="submit" class="btn" value="Add Meeting">
                     </form>
                 </div>
                 {% endif %}
-            </div>
-        
+            </div>     
         </div>
-        <div class="col s5">
-            <h1><em>{{game.name}}</em></h1>
-    
-            <a href="{% url 'games_update' game.id %}">Edit Game</a>
-            <a href="{% url 'games_delete' game.id %}">Delete</a>
-    
+        <div class="col s6">   
             <div>
-                <p style="font-weight:bold">{{game.description}}</p>
+                <p id="description">{{game.description}}</p>
             </div>
             {% if game_photo %}
             <img class="responsive-img " src="{{game_photo.last.url}}">
             {% else %}
             <div class="card-panel teal-text center-align">No Photos Uploaded</div>
             {% endif %}
-            <form action="{% url 'game_photo' game.id %}" enctype="multipart/form-data" method="POST"
+            <form class="game-form" action="{% url 'game_photo' game.id %}" enctype="multipart/form-data" method="POST"
                 class="card-panel">
                 {% csrf_token %}
                 <input type="file" name="photo-file">
                 <br><br>
-                <input type="submit" class="btn" value="Upload Photo">
+                <input  class="game-btn" type="submit" class="btn" value="Upload Photo">
             </form>
-    
-            <div><label>CoMmEnTs</label>
-                {%for c in comment%}
-                <p><em style="font-weight:bold"> ({{c.user.username}}) : </em>{{c.content}}</p>
-                <p>{{c.date}}</p>
-                {%endfor%}
-    
-                <form action="{% url 'add_comment' game.id %}" method="POST">
-                    {% csrf_token %}
-                    <!-- <textarea name="content" placeholder="Comments..." cols="30" rows="10"></textarea> -->
-                    {{ comment_form.as_p }}
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
         </div>
-        <div class="col s4">
-            <h2>Characters</h2>
+        <div id="character-col-wrapper" class="col s3">
+            <h3>Characters</h3>
             <ul>
                 {% for character in characters %}
                 <li>
-                    <a href="{% url 'characters_detail' character.id %}">{{character.name}}</a> {% if user == game.admin %}<a href="{% url 'games_kick' game.id character.id %}">Kick player</a>{% endif %} {% if user == character.player %}<a href="{% url 'games_leave' game.id character.id%}">Leave Game{% endif %}
+                    <a class="game-char-link" href="{% url 'characters_detail' character.id %}">{{character.name}}</a> {% if user == game.admin %}<a href="{% url 'games_kick' game.id character.id %}">Kick player</a>{% endif %} {% if user == character.player %}<a href="{% url 'games_leave' game.id character.id%}">Leave Game{% endif %}
                 </li>
                 {% endfor %}
             </ul>
@@ -85,6 +74,23 @@
             
             {% endif %}    
         </div>    
+    </div>
+    <div class="row">
+        <div class="container">
+            <h3>COMMENTS</h3>
+            {%for c in comment%}
+            <p><em style="font-weight:bold"> ({{c.user.username}}) : </em>{{c.content}}</p>
+            <p>{{c.date}}</p>
+            {%endfor%}
+
+            <form class="game-form" action="{% url 'add_comment' game.id %}" method="POST">
+                {% csrf_token %}
+                <!-- <textarea name="content" placeholder="Comments..." cols="30" rows="10"></textarea> -->
+                {{ comment_form.as_p }}
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        </div>       
     </div>
 </div>
 
