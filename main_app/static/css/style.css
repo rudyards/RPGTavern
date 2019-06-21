@@ -32,6 +32,12 @@ body {
   height: 100vh;
 }
 
+#forest {
+  background: url('../images/forest.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+}
+
 #game-wrapper {
   width: 95vw;
   margin-left: auto;
@@ -61,6 +67,10 @@ main {
 }
 
 #commons-nav, #commons-footer {
+  background-color: rgba(17, 19, 7, .8);
+}
+
+#forest-nav, #forest-footer {
   background-color: rgba(17, 19, 7, .8);
 }
 
@@ -240,6 +250,10 @@ h3 {
 .game-btn {
   background-color: #F1BC88;
   color: rgb(49, 13, 1);
+}
+
+.forest-wrapper {
+  font-family: 'Charm', cursive;
 }
 
 #id_date, #id_location, #id_note {
