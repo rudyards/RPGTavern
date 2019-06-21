@@ -56,6 +56,10 @@ main {
   background-color: rgba(7, 5, 8, 0.7);
 }
 
+#armory-nav, #armory-footer {
+  background-color: rgba(28, 17, 24, .8);
+}
+
 a {
   color: rgb(99, 183, 228);
 }
@@ -101,14 +105,14 @@ label {
 }
 
 input {
-  color: white;
+  color: rgb(172, 134, 120);
 }
 
 .btn {
   background-color: rgb(96, 170, 209);
 }
 
-.study-wrapper {
+.study-wrapper, .character-wrapper {
   margin-top: 18vh;
   width: 95vw;
   margin-left: auto;
@@ -137,13 +141,53 @@ input {
   font-weight: bold;
   color: rgb(255, 227, 176);
   background-color: rgba(16, 11, 24, 0.7);
-  box-shadow: 0 0 20px 1px rgba(101, 74, 144, .8);
+  box-shadow: 0 0 20px 1px #654a90cc;
 }
 
 .study-a {
   font-size: 2.6vmin;
   font-weight: bold;
   color: rgb(176, 230, 255);;
+}
+
+h2 {
+  color: rrgb(194, 207, 218);
+  border-bottom: 2px solid rgb(191, 181, 199);
+  box-shadow: 8px 5px 12px 0 rgba(159, 142, 173, 0.8);
+  margin-bottom: 5vh;
+}
+
+#char-links-row {
+  margin-bottom: 8vh;
+}
+
+.character-wrapper {
+  font-family: 'Uncial Antiqua', cursive;
+}
+
+.character-col-wrapper {
+  width: 80vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+form.card-panel {
+  background-color: rgb(95, 157, 182);
+}
+
+.char-form {
+  background-color: rgba(30, 30, 30, .6);
+  width: 25vw;
+  padding: 3vmin;
+}
+
+.char-a {
+  font-size: 5vh;
+  color: rgb(229, 222, 194);
+  background-color: #211E25;
+  border: 1px solid rgb(229, 222, 194);
+  padding: 5px;
+  border-radius: 2px;
 }
 
 #session-col-wrapper {
@@ -207,7 +251,8 @@ footer.page-footer {
 }
 
 #charheader {
-  margin: 12vmin 0 0 0;
+  font-size: 3vh;
+  color: #ffcb98;
 }
 
 #charsheet {
