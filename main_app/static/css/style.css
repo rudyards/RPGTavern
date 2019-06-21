@@ -45,12 +45,15 @@ main {
 }
 
 .navbar-fixed {
-  opacity: .8;
-  background-color: #23160f;
+  opacity: .9;
 }
 
-nav {
+#tavern-nav {
   background-color: rgba(35, 22, 15, .9);
+}
+
+#study-nav, #study-footer {
+  background-color: rgba(7, 5, 8, 0.7);
 }
 
 a {
@@ -103,6 +106,44 @@ input {
 
 .btn {
   background-color: rgb(96, 170, 209);
+}
+
+.study-wrapper {
+  margin-top: 18vh;
+  width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.study-h1 {
+  background-color: rgba(9, 9, 26, 0.7);
+  color: #F1BC88;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0 0 11px 2px #C95228;
+}
+
+.study-h3 {
+  background-color: rgba(9, 9, 26, 0.7);
+  color: #F1BC88;
+  border-radius: 5px;
+  border: 1px solid #C95228;
+  padding: 5px;
+  font-size: 4vmin;
+}
+
+.study-li{
+  font-size: 2.6vmin;
+  font-weight: bold;
+  color: rgb(255, 227, 176);
+  background-color: rgba(16, 11, 24, 0.7);
+  box-shadow: 0 0 20px 1px rgba(101, 74, 144, .8);
+}
+
+.study-a {
+  font-size: 2.6vmin;
+  font-weight: bold;
+  color: rgb(176, 230, 255);;
 }
 
 #session-col-wrapper {
@@ -184,6 +225,6 @@ footer.page-footer {
 
 
 #tavern-footer {
-  background-color: #23160F;
+  background-color: rgba(35, 22, 15, .9);
   color: #E4B96D;
 }

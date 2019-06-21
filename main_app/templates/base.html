@@ -13,22 +13,21 @@
 </head>
 <body id="tavern">
     <header class="navbar-fixed">
-        <nav>
-                <ul>
-                    <li><a href="{% url 'profile_page' %}" class="left brand-logo">&nbsp;&nbsp;TavernTalk</a></li>
-                </ul>
+        <nav id="tavern-nav">
+            <ul>
+                <li><a href="{% url 'profile_page' %}" class="left brand-logo">&nbsp;&nbsp;TavernTalk</a></li>
+            </ul>
 
-                <ul class="right">
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'characters_create' %}">New Character</a></li>
-                    <li><a href="{% url 'games_create' %}">New Game</a></li>
-                    <li><a href="{% url 'logout' %}">Log Out</a></li>
-                    {% else %}
-                    <!-- <li><a href="{% url 'login' %}">Log In</a></li> -->
-                    <!-- <li><a href="{% url 'signup' %}">Sign Up</a></li> -->
-                {% endif %}
-                </ul>
-            </div>
+            <ul class="right">
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'characters_create' %}">New Character</a></li>
+                <li><a href="{% url 'games_create' %}">New Game</a></li>
+                <li><a href="{% url 'logout' %}">Log Out</a></li>
+                {% else %}
+                <!-- <li><a href="{% url 'login' %}">Log In</a></li> -->
+                <!-- <li><a href="{% url 'signup' %}">Sign Up</a></li> -->
+            {% endif %}
+            </ul>
         </nav>
     </header>
     <main>
