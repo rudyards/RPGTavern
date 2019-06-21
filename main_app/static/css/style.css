@@ -60,6 +60,10 @@ main {
   background-color: rgba(28, 17, 24, .8);
 }
 
+#commons-nav, #commons-footer {
+  background-color: rgba(17, 19, 7, .8);
+}
+
 a {
   color: rgb(99, 183, 228);
 }
@@ -106,6 +110,10 @@ label {
 
 input {
   color: rgb(172, 134, 120);
+}
+
+textarea {
+  color: #DFD5B0;
 }
 
 .btn {
@@ -157,7 +165,7 @@ h2 {
   margin-bottom: 5vh;
 }
 
-#char-links-row {
+#char-links-row, #game-links-row {
   margin-bottom: 8vh;
 }
 
@@ -190,14 +198,32 @@ form.card-panel {
   border-radius: 2px;
 }
 
-#session-col-wrapper {
-  margin-right: 3vw;
-  background-color: rgba(73, 25, 9, .7);
+#session-col-wrapper, #character-col-wrapper {
+  background-color: rgba(33, 24, 6, .7);
   color: #DFD5B0;
 }
 
 h3 {
   border-bottom: 2px solid #DFD5B0;
+}
+
+.game-a {
+  font-size: 3vh;
+  color: #DFD5B0;
+}
+
+.game-char-link {
+  font-size: 3min;
+  color: rgb(176, 230, 255);
+}
+
+.game-form {
+  background-color: rgba(33, 24, 6, .7);
+  padding: 3vmin;
+}
+
+#description {
+  font-size: 4vmin;
 }
 
 .session-row {
@@ -209,6 +235,11 @@ h3 {
   background-color: rgba(49, 13, 1, 0.8);
   border: 1px solid black;
   padding: 1vmin;
+}
+
+.game-btn {
+  background-color: #F1BC88;
+  color: rgb(49, 13, 1);
 }
 
 #id_date, #id_location, #id_note {
