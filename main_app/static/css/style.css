@@ -252,20 +252,25 @@ footer.page-footer {
 
 #charheader {
   font-size: 3vh;
+  display: inline-block;
+  padding: 8px;
+  border-bottom: 2px solid #ffcb98;
+  border-radius: 2px;
+  margin-bottom: 2vh;
   color: #ffcb98;
+  background-color: rgba(33, 30, 37, .8);
 }
 
 #charsheet {
   height: 70vh;
   max-height:60vw;
   object-fit: contain; 
+  box-shadow: 6px 5px 20px 0px rgb(21, 20, 22);
 }
 
-#char-img {
-  margin-top: 12vmin;
-  height: 40vh;
-  max-height:30vw;
-  object-fit: contain; 
+#charimg {
+  margin-top: 2vmin;
+  box-shadow: 0px 0px 20px 20px rgb(21, 20, 22);
 }
 
 
