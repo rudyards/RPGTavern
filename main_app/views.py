@@ -20,7 +20,7 @@ BUCKET = 'taverntalk'
 def home(request):
     user = request.user
     if user.is_authenticated:
-        return render(request, 'profile.html')
+        return redirect('profile_page')
     else:
         return render(request, 'home.html')
 
