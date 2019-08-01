@@ -323,3 +323,11 @@ footer.page-footer {
   background-color: rgba(35, 22, 15, .9);
   color: #E4B96D;
 }
+
+#character-select {
+  color: black;
+  font-size: 15px;
+  padding: 10px;
+  display: block;
+  width: 40vw;
+}
