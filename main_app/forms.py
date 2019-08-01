@@ -10,5 +10,5 @@ class MeetingForm(ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ['content', 'date']
+        fields = ['content']
 
