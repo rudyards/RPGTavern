@@ -37,7 +37,7 @@ class Meeting(models.Model):
 class Comment(models.Model):
     content = models.TextField(max_length=150)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField('Date')
+    date = models.DateField('Date', default=datetime.now())
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
 
 
