@@ -3,7 +3,7 @@
 
 <form method="post" action="{% url 'games_join_yes' game_id %}">
     {% csrf_token %}
-    <select name="character">
+    <select id="character-select" name="character">
         {% for character in characters %}
         <option value="{{character.name}}">{{character.name}}</option>
         {% endfor %}
