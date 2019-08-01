@@ -7,7 +7,7 @@
             <a class="char-a" href="{% url 'characters_update' character.id %}">EDIT</a>
         </div>
         <div class="col s4">
-            <a class="char-a" href="#">ENTER GAME</a>
+            <a class="char-a" href="{% url 'games_detail' character.game.id %}">ENTER GAME</a>
         </div>
         <div class="col s4">
             <a class="char-a" href="{% url 'characters_delete' character.id %}">DELETE</a>
